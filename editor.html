@@ -150,8 +150,10 @@ function() {
     initEditor($("editor-form"), false);
 
     setInterval(function() {
-        editorMarkup.innerHTML = editor.innerHTML.escapeHTML();
-        sandbox.innerHTML = editor.innerHTML;
+        if (sandbox.innerHTML != editor.innerHTML) {
+          editorMarkup.innerHTML = editor.innerHTML.escapeHTML();
+          sandbox.innerHTML = editor.innerHTML;
+        }
     },
     500);
 });
