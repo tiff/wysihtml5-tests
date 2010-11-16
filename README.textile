@@ -1,0 +1,28 @@
+h1. About
+
+This repo contains tests and demos for the contentEditable attribute introduced in the HTML5 spec.
+
+h1. Links
+
+contentEditable attribute spec:
+http://www.whatwg.org/specs/web-apps/current-work/multipage/editing.html#contenteditable
+
+javascript api:
+http://www.whatwg.org/specs/web-apps/current-work/multipage/dnd.html#editing-apis
+
+mozilla documentation:
+https://developer.mozilla.org/en/rich-text_editing_in_mozilla
+
+strange behavior of contentEditable in ie:
+http://annevankesteren.nl/2005/07/more-contenteditable
+
+the road to html5 contentEditable:
+http://blog.whatwg.org/the-road-to-html-5-contenteditable
+
+demo on quirksmode:
+http://www.quirksmode.org/dom/execCommand/
+
+h1. Contributors
+
+* Ingo Chao (ingochao)
+* Christopher Blum (tiff)

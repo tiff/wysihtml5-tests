@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>contentEditable</title>
+    <meta charset="utf-8">
+    <style>
+      body {
+        font-family: verdana, arial, sans-serif;
+      }
+      h1 {
+        font-size: 20px;
+      }
+      h3 {
+        font-size: 18px;
+      }
+      td, th {
+        padding: 5px;
+      }
+      td.yes {
+        background-color: rgb(0, 255, 0);
+        background-color: rgba(0, 255, 0, 0.5);
+      }
+      td {
+        background-color: rgb(255, 0, 0);
+        background-color: rgba(255, 0, 0, 0.5);
+      }
+      td:first-child {
+        background-color: transparent;
+      }
+      th {
+        background-color: #ccc;
+      }
+      
+      tr.separator {
+        background-color: #fff;
+        text-align: center;
+        font-weight: bold;
+      }
+      
+      tr.separator:hover {
+        background-color: #fff;
+      }
+      
+      tr:hover {
+        background-color: #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Compliance Test for contenteditable elements and javascript api</h1>
+    <p>Your browser: <span id="user-agent"></span></p>
+    
+    <table>
+      <tr>
+        <th>Method/Attribute</th>
+        <th>Your Browser</th>
+        <th>IE 6</th>
+        <th>IE 7</th>
+        <th>IE 8</th>
+        <th>IE 9b</th>
+        <th>Chrome 7</th>
+        <th>Safari 5</th>
+        <th>Firefox 3.6</th>
+        <th>Firefox 4b</th>
+        <th>Android 2.2 (MobileSafari)</th>
+        <th>iPad iOS 3.2.2 (MobileSafari)</th>
+      </tr>
+      <tr>
+        <td>contentEditable</td>
+        <td id="contentEditable">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>designMode</td>
+        <td id="designMode">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>document.execCommand</td>
+        <td class="api-method" id="execCommand">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>document.queryCommandEnabled</td>
+        <td class="api-method" id="queryCommandEnabled">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>document.queryCommandIndeterm</td>
+        <td class="api-method" id="queryCommandIndeterm">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>document.queryCommandState</td>
+        <td class="api-method" id="queryCommandState">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>document.queryCommandSupported</td>
+        <td class="api-method" id="queryCommandSupported">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>document.queryCommandValue</td>
+        <td class="api-method" id="queryCommandValue">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+    </table>
+    
+    <h3>Commands</h3>
+    
+    <table>
+      <tr>
+        <th>Command</th>
+        <th>Your Browser</th>
+        <th>IE 6</th>
+        <th>IE 7</th>
+        <th>IE 8</th>
+        <th>IE 9b</th>
+        <th>Chrome 7</th>
+        <th>Safari 5</th>
+        <th>Firefox 3.6</th>
+        <th>Firefox 4b</th>
+        <th>Android 2.2 (MobileSafari)</th>
+        <th>iPad iOS 3.2.2 (MobileSafari)</th>
+      </tr>
+      <tr>
+        <td>bold</td>
+        <td class="command" id="bold">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>error</td>
+        <td>error</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>createLink</td>
+        <td class="command" id="createLink">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>error</td>
+        <td>error</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>delete</td>
+        <td class="command" id="delete">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>error</td>
+        <td>error</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>formatBlock</td>
+        <td class="command" id="formatBlock">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>error</td>
+        <td>error</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>forwardDelete</td>
+        <td class="command" id="forwardDelete">no</td>
+        <td>no!</td>
+        <td>no!</td>
+        <td>no!</td>
+        <td>no!</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>error</td>
+        <td>error</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>insertImage</td>
+        <td class="command" id="insertImage">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>error</td>
+        <td>error</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>insertHTML</td>
+        <td class="command" id="insertHTML">no</td>
+        <td>no!</td>
+        <td>no!</td>
+        <td>no!</td>
+        <td>no!</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>error</td>
+        <td>error</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>insertLineBreak</td>
+        <td class="command" id="insertLineBreak">no</td>
+        <td>no!</td>
+        <td>no!</td>
+        <td>no!</td>
+        <td>no!</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>error</td>
+        <td>error</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>insertOrderedList</td>
+        <td class="command" id="insertOrderedList">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>error</td>
+        <td>error</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>insertUnorderedList</td>
+        <td class="command" id="insertUnorderedList">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>error</td>
+        <td>error</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>insertParagraph</td>
+        <td class="command" id="insertParagraph">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>error</td>
+        <td>error</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>insertText</td>
+        <td class="command" id="insertText">no</td>
+        <td>no!</td>
+        <td>no!</td>
+        <td>no!</td>
+        <td>no!</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>error</td>
+        <td>error</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>italic</td>
+        <td class="command" id="italic">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>error</td>
+        <td>error</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>redo</td>
+        <td class="command" id="redo">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>error</td>
+        <td>error</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>selectAll</td>
+        <td class="command" id="selectAll">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>error</td>
+        <td>error</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>subscript</td>
+        <td class="command" id="subscript">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>error</td>
+        <td>error</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>superscript</td>
+        <td class="command" id="superscript">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>error</td>
+        <td>error</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>undo</td>
+        <td class="command" id="undo">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>error</td>
+        <td>error</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>unlink</td>
+        <td class="command" id="unlink">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>error</td>
+        <td>error</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>unselect</td>
+        <td class="command" id="unselect">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>error</td>
+        <td>error</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      
+      <tr class="separator">
+        <td colspan="12">Mozilla specific (mentioned on their MDC page but not in the WHATWG specs)</td>
+      </tr>
+      <tr>
+        <th>Command</th>
+        <th>Your Browser</th>
+        <th>IE 6</th>
+        <th>IE 7</th>
+        <th>IE 8</th>
+        <th>IE 9b</th>
+        <th>Chrome 7</th>
+        <th>Safari 5</th>
+        <th>Firefox 3.6</th>
+        <th>Firefox 4b</th>
+        <th>Android 2.2 (MobileSafari)</th>
+        <th>iPad iOS 3.2.2 (MobileSafari)</th>
+      </tr>
+      
+      <tr>
+        <td>backColor</td>
+        <td class="command" id="backColor">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>error</td>
+        <td>error</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>contentReadOnly</td>
+        <td class="command" id="contentReadOnly">no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>error</td>
+        <td>error</td>
+        <td>no</td>
+        <td>no</td>
+      </tr>
+      <tr>
+        <td>copy</td>
+        <td class="command" id="copy">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>no</td>
+        <td>no</td>
+        <td>error</td>
+        <td>error</td>
+        <td>no</td>
+        <td>no</td>
+      </tr>
+      <tr>
+        <td>cut</td>
+        <td class="command" id="cut">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>no</td>
+        <td>no</td>
+        <td>error</td>
+        <td>error</td>
+        <td>no</td>
+        <td>no</td>
+      </tr>
+      <tr>
+        <td>decreaseFontSize</td>
+        <td class="command" id="decreaseFontSize">no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>error</td>
+        <td>error</td>
+        <td>no</td>
+        <td>no</td>
+      </tr>
+      <tr>
+        <td>enableInlineTableEditing</td>
+        <td class="command" id="enableInlineTableEditing">no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>error</td>
+        <td>error</td>
+        <td>no</td>
+        <td>no</td>
+      </tr>
+      <tr>
+        <td>enableObjectResizing</td>
+        <td class="command" id="enableObjectResizing">no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>error</td>
+        <td>error</td>
+        <td>no</td>
+        <td>no</td>
+      </tr>
+      <tr>
+        <td>fontName</td>
+        <td class="command" id="fontName">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>error</td>
+        <td>error</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>fontSize</td>
+        <td class="command" id="fontSize">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>error</td>
+        <td>error</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>foreColor</td>
+        <td class="command" id="foreColor">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>error</td>
+        <td>error</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>heading</td>
+        <td class="command" id="heading">no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>error</td>
+        <td>error</td>
+        <td>no</td>
+        <td>no</td>
+      </tr>
+      <tr>
+        <td>hiliteColor</td>
+        <td class="command" id="hiliteColor">no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>error</td>
+        <td>error</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>increaseFontSize</td>
+        <td class="command" id="increaseFontSize">no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>error</td>
+        <td>error</td>
+        <td>no</td>
+        <td>no</td>
+      </tr>
+      <tr>
+        <td>indent</td>
+        <td class="command" id="indent">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>error</td>
+        <td>error</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>insertBrOnReturn</td>
+        <td class="command" id="insertBrOnReturn">no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>error</td>
+        <td>error</td>
+        <td>no</td>
+        <td>no</td>
+      </tr>
+      <tr>
+        <td>justifyCenter</td>
+        <td class="command" id="justifyCenter">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>error</td>
+        <td>error</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>justifyLeft</td>
+        <td class="command" id="justifyLeft">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>error</td>
+        <td>error</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>justifyRight</td>
+        <td class="command" id="justifyRight">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>error</td>
+        <td>error</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>outdent</td>
+        <td class="command" id="outdent">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>error</td>
+        <td>error</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>paste</td>
+        <td class="command" id="paste">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>no</td>
+        <td>no</td>
+        <td>error</td>
+        <td>error</td>
+        <td>no</td>
+        <td>no</td>
+      </tr>
+      <tr>
+        <td>removeFormat</td>
+        <td class="command" id="removeFormat">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>error</td>
+        <td>error</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>strikeThrough</td>
+        <td class="command" id="strikeThrough">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>error</td>
+        <td>error</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>underline</td>
+        <td class="command" id="underline">no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>error</td>
+        <td>error</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>useCSS</td>
+        <td class="command" id="useCSS">no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>error</td>
+        <td>error</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+      <tr>
+        <td>styleWithCSS</td>
+        <td class="command" id="styleWithCSS">no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>error</td>
+        <td>error</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+      </tr>
+    </table>
+    
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/prototype/1.6.1.0/prototype.js"></script>
+    <script>
+      $("user-agent").update(navigator.userAgent);
+      
+      if ("contentEditable" in new Element("div")) {
+        $("contentEditable").update("yes").addClassName("yes");
+      }
+      
+      if ("designMode" in document) {
+        $("designMode").update("yes").addClassName("yes");
+      }
+      
+      $$(".api-method").each(function(element) {
+        if (document[element.id]) { element.update("yes").addClassName("yes"); }
+      });
+      
+      if (document.queryCommandSupported) {
+        $$(".command").each(function(element) {
+          try {
+            if (document.queryCommandSupported(element.id)) {
+              element.update("yes").addClassName("yes");
+            }
+          } catch(e) {
+            element.update("error");
+          }
+        });
+      }
+
+    </script>
+  </body>
+</html>

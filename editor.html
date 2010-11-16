@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+  <head>
+<title>contentEditable</title>
+<meta charset="utf-8">
+<style>
+
+
+
+#editor:focus {
+  box-shadow:0 0 15px blue; 
+}
+
+
+#editor {
+  min-height: 100px;
+
+}
+fieldset {
+  display: inline-block;
+  padding: 5px;
+  margin: 0 0 5px 0;
+    border: 1px solid black;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background: lightgrey;
+}
+
+.section {
+  border: 1px solid black;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.innercircle {
+  margin: 5px 0;
+  padding: 5px;
+  border: 1px solid #acacac;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  display: block;
+}
+
+hr {
+  visibility: hidden;
+  }
+  
+
+
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/prototype/1.6.1.0/prototype.js"></script>
+
+</head>
+<body>
+
+
+
+<div class="section" id="editor-section">
+  <h2>Editor</h2>
+  <form id="editor-form">
+    <fieldset>
+      <button type="button" data-ed="cmd=bold">bold</button>
+      <button type="button" data-ed="cmd=italic">italic</button>
+      <button type="button" data-ed="cmd=subscript">subscript</button>
+      <button type="button" data-ed="cmd=superscript">superscript</button>
+    </fieldset>
+    <fieldset>
+      <button type="button" data-ed="cmd=insertLineBreak">insertLineBreak</button>
+      <button type="button" data-ed="cmd=insertParagraph">insertParagraph</button>
+      <button type="button" data-ed="cmd=insertOrderedList">insertOrderedList</button>
+      <button type="button" data-ed="cmd=insertUnorderedList">insertUnorderedList</button>
+      <button type="button" data-ed="cmd=insertHTML&tag=table">insertHTML:Table</button>
+    </fieldset>
+    <fieldset>
+      <button type="button" data-ed="cmd=formatBlock&tag=p">formatBlock:P</button>
+      <button type="button" data-ed="cmd=formatBlock&tag=h1">formatBlock:H1</button>
+      <button type="button" data-ed="cmd=formatBlock&tag=h2">formatBlock:H2</button>
+      <button type="button" data-ed="cmd=formatBlock&tag=h3">formatBlock:H3</button>
+      <button type="button" data-ed="cmd=formatBlock&tag=blockquote">formatBlock:Blockquote</button>
+    </fieldset>
+    <fieldset>    
+      <button type="button" data-ed="cmd=insertImage">insertImage</button>
+      <button type="button" data-ed="cmd=createLink">createLink</button>
+      <button type="button" data-ed="cmd=unlink">unlink</button>
+    </fieldset>
+    <fieldset>
+      <button type="button" data-ed="cmd=selectAll">selectAll</button>
+      <button type="button" data-ed="cmd=unselect">unselect</button>
+    </fieldset>
+    <fieldset>
+      <button type="button" data-ed="cmd=delete">delete</button>
+      <button type="button" data-ed="cmd=forwardDelete">forwardDelete</button>
+    </fieldset>
+    <fieldset>
+      <button type="button" data-ed="cmd=undo">undo</button>
+      <button type="button" data-ed="cmd=redo">redo</button>
+    </fieldset>
+    
+    <!--<fieldset>
+      <button type="button" data-ed="cmd=styleWithCSS">styleWithCSS = <span>false</span></button>
+    </fieldset>-->
+
+  </form>
+  <div id="editor" class="innercircle" contenteditable="true" >#</div><!--not empty for Fx's cursor-->
+</div>
+
+<div class="section">
+  <h2>Generated Markup (<code>styleWithCSS == false</code>)</h2>
+
+
+  <code id="editor-markup" class="innercircle"></code>
+  <hr>
+</div>
+
+<div class="section">
+  <h2>Rendered HTML</h2>
+  <div id="sandbox" class="innercircle"></div>
+
+</div>  
+
+<div class="section">
+  <h2>Note</h2>
+  <p>
+    This editor is for generating some contentEditable-output. Works best in Webkit, if at all.
+  </p>
+  <ul>
+    <li>
+      <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/editing.html#contenteditable">HTML5: contenteditable attribute</a>
+    </li>
+    <li>
+      <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/dnd.html#execCommand">HTML5: execCommand</a>
+    </li>
+  </ul>
+</div>  
+
+  
+<script>
+Event.observe(window, 'load',
+function() {
+
+    var editor = $("editor"),
+      editorMarkup = $("editor-markup"),
+      sandbox = $("sandbox");
+    
+    editor.focus();
+    
+    initEditor($("editor-form"), false);
+
+    setInterval(function() {
+        editorMarkup.innerHTML = editor.innerHTML.escapeHTML();
+        sandbox.innerHTML = editor.innerHTML;
+    },
+    500);
+});
+
+function initEditor(form, styleWithCSS) {
+
+    var buttons = form.select('button[data-ed]');
+
+
+    if (isSupported('styleWithCSS')) {
+        document.execCommand('styleWithCSS', styleWithCSS, false);
+    }
+    
+    buttons.each(function(button) {
+
+        var query = button.readAttribute('data-ed').toQueryParams();
+        var command = query.cmd;
+
+        button.disabled = true;
+
+        if (command) {
+            setInterval(function() {
+                if (isSupported(command))
+                button.disabled = false;
+                else
+                button.disabled = true;
+            },
+            500);
+            switch (command) {
+            case 'bold':
+                Event.observe(button, 'click',
+                function() {
+                    document.execCommand('bold', null, null)
+                });
+                break;
+            case 'italic':
+                Event.observe(button, 'click',
+                function() {
+                    document.execCommand('italic', null, null)
+                });
+                break;
+            case 'subscript':
+                Event.observe(button, 'click',
+                function() {
+                    document.execCommand('subscript', null, null)
+                });
+                break;
+            case 'superscript':
+                Event.observe(button, 'click',
+                function() {
+                    document.execCommand('superscript', null, null)
+                });
+                break;
+            case 'insertLineBreak':
+                Event.observe(button, 'click',
+                function() {
+                    document.execCommand('insertLineBreak', false, null)
+                });
+                break;
+            case 'insertParagraph':
+                Event.observe(button, 'click',
+                function() {
+                    document.execCommand('insertParagraph', null, null)
+                });
+                break;
+            case 'insertOrderedList':
+                Event.observe(button, 'click',
+                function() {
+                    document.execCommand('insertOrderedList', null, null)
+                });
+                break;
+            case 'insertUnorderedList':
+                Event.observe(button, 'click',
+                function() {
+                    document.execCommand('insertUnorderedList', null, null)
+                });
+                break;
+            case 'insertHTML':
+                switch (query.tag) {
+                case 'table':
+                    Event.observe(button, 'click',
+                    function() {
+                        document.execCommand('insertHTML', null, '<table border="1" cellspacing="0"><thead><tr><th>Thead1</th><th>Thead2</th><th>Thead3</th></tr></thead><tfoot><tr><td>Tfoot1</td><td>Tfoot2</td><td>Tfoot3</td></tr></tfoot><tbody><tr><td>Row1 Col1</td><td>Row1 Col2</td><td>Row1 Col3</td></tr><tr><td>Row2 Col1</td><td>Row2 Col2</td><td>Row3 Col3</td></tr></tbody></table>')
+                    });
+                    break;
+                default:
+                    break;
+                }
+                break;
+            case 'formatBlock':
+                switch (query.tag) {
+                  case 'p':
+                      Event.observe(button, 'click',
+                      function() {
+                          document.execCommand('formatBlock', null, '<p>')
+                      });
+                      break;
+                      
+                case 'h1':
+                    Event.observe(button, 'click',
+                    function() {
+                        document.execCommand('formatBlock', null, '<h1>')
+                    });
+                    break;
+                case 'h2':
+                    Event.observe(button, 'click',
+                    function() {
+                        document.execCommand('formatBlock', null, '<h2>')
+                    });
+                    break;
+                case 'h3':
+                    Event.observe(button, 'click',
+                    function() {
+                        document.execCommand('formatBlock', null, '<h3>')
+                    });
+                    break;
+                case 'blockquote':
+                    Event.observe(button, 'click',
+                    function() {
+                        document.execCommand('formatBlock', null, '<blockquote>')
+                    });
+                    break;
+                default:
+                    break;
+                }
+                break;
+            case 'insertImage':
+                Event.observe(button, 'click',
+                function() {
+                    document.execCommand('insertImage', false, prompt('Enter a URL:', 'http://'))
+                });
+                break;
+            case 'createLink':
+                Event.observe(button, 'click',
+                function() {
+                    document.execCommand('createLink', false, prompt('Enter a URL:', 'http://'))
+                });
+                break;
+            case 'unlink':
+                Event.observe(button, 'click',
+                function() {
+                    document.execCommand('unlink', null, null)
+                });
+                break;
+            case 'selectAll':
+                Event.observe(button, 'click',
+                function() {
+                    $('editor').focus();
+                    document.execCommand('selectAll', null, null)
+                });
+                break;
+            case 'unselect':
+                Event.observe(button, 'click',
+                function() {
+                    document.execCommand('unselect', null, null)
+                });
+                break;
+            case 'delete':
+                Event.observe(button, 'click',
+                function() {
+                    document.execCommand('delete', null, null)
+                });
+                break;
+            case 'forwardDelete':
+                Event.observe(button, 'click',
+                function() {
+                    document.execCommand('forwardDelete', null, null)
+                });
+                break;
+            case 'undo':
+                Event.observe(button, 'click',
+                function() {
+                    document.execCommand('undo', null, null)
+                });
+                break;
+            case 'redo':
+                Event.observe(button, 'click',
+                function() {
+                    document.execCommand('redo', null, null)
+                });
+                break;
+                // case 'styleWithCSS':
+                //      Event.observe(button, 'click',
+                //      function() {
+                //        styleWithCSS = (styleWithCSS ? false : true);
+                //         document.execCommand('styleWithCSS', styleWithCSS, null);
+                //        button.down().update(styleWithCSS);
+                //      });
+                //      break;
+            default:
+                break;
+            }
+        }
+    });
+
+
+    function isSupported(s) {
+        try
+        {
+            return (document.queryCommandEnabled(s));
+        } catch(e) {
+            return false;
+            //querycommand... function not supported
+        }
+    }
+
+};
+  
+</script>
+
+
+</body>
+</html>
