@@ -1,6 +1,16 @@
 <?
 require('xml2ary.inc.php');
-$xml = file_get_contents('http://validator.tifftiff.de/w3c-validator/check?output=soap12&fragment=' . urlencode($_REQUEST['fragment']));
+require('postRequest.inc.php');
+
+list($header, $xml) = postRequest('http://validator.tifftiff.de/w3c-validator/check', array(
+  'output' => 'soap12',
+  'fragment' => stripslashes($_REQUEST['fragment']),
+));
+
+// Fix
+$start_pos = strpos($xml, '<?xml');
+$length = strrpos($xml, '>') + 1 - $end_pos;
+$xml = substr($xml, $start_pos, $length);
 
 if ($_REQUEST['output'] == 'json') {
   header('Content-Type: application/json');
