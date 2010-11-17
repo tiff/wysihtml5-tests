@@ -5,7 +5,9 @@
 <meta charset="utf-8">
 <style>
 #editor:focus {
-  box-shadow: 0 0 15px blue;
+  
+  -moz-box-shadow: 0 0 5px blue;
+  box-shadow: 0 0 5px blue;
 }
 #editor {
   min-height: 100px;
@@ -17,7 +19,7 @@ fieldset {
   border: 1px solid black;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  background: lightgrey;
+  background: silver;
 }
 .section {
   border: 1px solid black;
@@ -48,12 +50,14 @@ hr {
   left: 0;
   margin: 0;
   padding: 5px;
-  background: black;
+  background: silver;
   display: none;
-  color: #fff;
   border: 1px solid gray;
   -moz-border-radius: 3px;
   border-radius: 3px;
+  -webkit-box-shadow: 0 0 5px orange;
+  -moz-box-shadow: 0 0 5px orange;
+  box-shadow: 0 0 5px orange;
 }
 #editor-form dt:hover+dd {
   display: block;
