@@ -4,28 +4,21 @@
 <title>contentEditable</title>
 <meta charset="utf-8">
 <style>
-
-
-
 #editor:focus {
-  box-shadow:0 0 15px blue; 
+  box-shadow: 0 0 15px blue;
 }
-
-
 #editor {
   min-height: 100px;
-
 }
 fieldset {
   display: inline-block;
   padding: 5px;
   margin: 0 0 5px 0;
-    border: 1px solid black;
+  border: 1px solid black;
   -moz-border-radius: 5px;
   border-radius: 5px;
   background: lightgrey;
 }
-
 .section {
   border: 1px solid black;
   -moz-border-radius: 5px;
@@ -33,7 +26,6 @@ fieldset {
   padding: 10px;
   margin: 10px 0;
 }
-
 .innercircle {
   margin: 5px 0;
   padding: 5px;
@@ -42,12 +34,35 @@ fieldset {
   border-radius: 3px;
   display: block;
 }
-
 hr {
   visibility: hidden;
-  }
-  
-
+}
+#editor-form dl {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+}
+#editor-form dl dd {
+  position: absolute;
+  bottom: 2em;
+  left: 0;
+  margin: 0;
+  padding: 5px;
+  background: black;
+  display: none;
+  color: #fff;
+  border: 1px solid gray;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+#editor-form dt:hover+dd {
+  display: block;
+}
+#editor-form dl dt {
+  display: inline-block;
+  text-decoration: underline;
+  font-size: smaller;
+}
 
 </style>
 
@@ -61,6 +76,8 @@ hr {
 <div class="section" id="editor-section">
   <h2>Editor</h2>
   <form id="editor-form">
+
+
     <fieldset>
       <button type="button" data-ed="cmd=bold">bold</button>
       <button type="button" data-ed="cmd=italic">italic</button>
@@ -72,20 +89,22 @@ hr {
       <button type="button" data-ed="cmd=insertParagraph">insertParagraph</button>
       <button type="button" data-ed="cmd=insertOrderedList">insertOrderedList</button>
       <button type="button" data-ed="cmd=insertUnorderedList">insertUnorderedList</button>
-      <button type="button" data-ed="cmd=insertHTML&tag=table">insertHTML:Table</button>
+      <button type="button" data-ed="cmd=insertHTML&arg=table">insertHTML:Table</button>
+      <button type="button" data-ed="cmd=insertText&arg=lorem">insertText:LoremIpsum</button>
     </fieldset>
     <fieldset>
-      <button type="button" data-ed="cmd=formatBlock&tag=p">formatBlock:P</button>
-      <button type="button" data-ed="cmd=formatBlock&tag=h1">formatBlock:H1</button>
-      <button type="button" data-ed="cmd=formatBlock&tag=h2">formatBlock:H2</button>
-      <button type="button" data-ed="cmd=formatBlock&tag=h3">formatBlock:H3</button>
-      <button type="button" data-ed="cmd=formatBlock&tag=blockquote">formatBlock:Blockquote</button>
+      <button type="button" data-ed="cmd=formatBlock&arg=p">formatBlock:P</button>
+      <button type="button" data-ed="cmd=formatBlock&arg=h1">formatBlock:H1</button>
+      <button type="button" data-ed="cmd=formatBlock&arg=h2">formatBlock:H2</button>
+      <button type="button" data-ed="cmd=formatBlock&arg=h3">formatBlock:H3</button>
+      <button type="button" data-ed="cmd=formatBlock&arg=blockquote">formatBlock:Blockquote</button>
     </fieldset>
     <fieldset>    
       <button type="button" data-ed="cmd=insertImage">insertImage</button>
       <button type="button" data-ed="cmd=createLink">createLink</button>
       <button type="button" data-ed="cmd=unlink">unlink</button>
     </fieldset>
+      <div id="editor" class="innercircle" contenteditable="true" >#</div><!--not empty for Fx's cursor-->
     <fieldset>
       <button type="button" data-ed="cmd=selectAll">selectAll</button>
       <button type="button" data-ed="cmd=unselect">unselect</button>
@@ -93,6 +112,12 @@ hr {
     <fieldset>
       <button type="button" data-ed="cmd=delete">delete</button>
       <button type="button" data-ed="cmd=forwardDelete">forwardDelete</button>
+              <dl>
+          <dt>copy</dt> <dd><kbd><kbd>Ctrl</kbd>+<kbd>C</kbd></kbd> (Win) <br> <kbd><kbd>cmd</kbd>+<kbd>C</kbd></kbd> (Mac)</dd>
+          <dt>paste</dt> <dd><kbd><kbd>Ctrl</kbd>+<kbd>V</kbd></kbd> (Win)  <br> <kbd><kbd>cmd</kbd>+<kbd>V</kbd></kbd> (Mac)</dd>
+          <dt>cut</dt> <dd><kbd><kbd>Ctrl</kbd>+<kbd>X</kbd></kbd> (Win)  <br> <kbd><kbd>cmd</kbd>+<kbd>X</kbd></kbd> (Mac)</dd>
+          <dt>drag&drop</dt><dd>Select content anywhere with your mouse, and drag it into the editor panel.</dd>
+        </dl>
     </fieldset>
     <fieldset>
       <button type="button" data-ed="cmd=undo">undo</button>
@@ -104,7 +129,7 @@ hr {
     </fieldset>-->
 
   </form>
-  <div id="editor" class="innercircle" contenteditable="true" >#</div><!--not empty for Fx's cursor-->
+
 </div>
 
 <div class="section">
@@ -232,7 +257,7 @@ function initEditor(form, styleWithCSS) {
                 });
                 break;
             case 'insertHTML':
-                switch (query.tag) {
+                switch (query.arg) {
                 case 'table':
                     Event.observe(button, 'click',
                     function() {
@@ -243,8 +268,21 @@ function initEditor(form, styleWithCSS) {
                     break;
                 }
                 break;
+            case 'insertText':
+                switch (query.arg) {
+                case 'lorem':
+                    Event.observe(button, 'click',
+                    function() {
+                        document.execCommand('insertText', null, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')
+                    });
+                    break;
+                default:
+                    break;
+                }
+                break;                
+
             case 'formatBlock':
-                switch (query.tag) {
+                switch (query.arg) {
                   case 'p':
                       Event.observe(button, 'click',
                       function() {
