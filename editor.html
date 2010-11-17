@@ -67,7 +67,27 @@ hr {
   text-decoration: underline;
   font-size: smaller;
 }
-
+#validation-results {
+  margin-top: 20px;
+  background-color: #eee;
+  padding: 5px;
+}
+#validation-results h4,
+#validation-results p,
+#validation-results dl {
+  padding: 0;
+  margin: 0;
+}
+#validation-results li {
+  margin-bottom: 20px;
+}
+#validation-results .source {
+  margin-top: 10px;
+}
+#validation-results h4,
+#validation-results .source strong {
+  color: red;
+}
 </style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/prototype/1.6.1.0/prototype.js"></script>
@@ -93,15 +113,15 @@ hr {
       <button type="button" data-ed="cmd=insertParagraph">insertParagraph</button>
       <button type="button" data-ed="cmd=insertOrderedList">insertOrderedList</button>
       <button type="button" data-ed="cmd=insertUnorderedList">insertUnorderedList</button>
-      <button type="button" data-ed="cmd=insertHTML&arg=table">insertHTML:Table</button>
-      <button type="button" data-ed="cmd=insertText&arg=lorem">insertText:LoremIpsum</button>
+      <button type="button" data-ed="cmd=insertHTML&amp;arg=table">insertHTML:Table</button>
+      <button type="button" data-ed="cmd=insertText&amp;arg=lorem">insertText:LoremIpsum</button>
     </fieldset>
     <fieldset>
-      <button type="button" data-ed="cmd=formatBlock&arg=p">formatBlock:P</button>
-      <button type="button" data-ed="cmd=formatBlock&arg=h1">formatBlock:H1</button>
-      <button type="button" data-ed="cmd=formatBlock&arg=h2">formatBlock:H2</button>
-      <button type="button" data-ed="cmd=formatBlock&arg=h3">formatBlock:H3</button>
-      <button type="button" data-ed="cmd=formatBlock&arg=blockquote">formatBlock:Blockquote</button>
+      <button type="button" data-ed="cmd=formatBlock&amp;arg=p">formatBlock:P</button>
+      <button type="button" data-ed="cmd=formatBlock&amp;arg=h1">formatBlock:H1</button>
+      <button type="button" data-ed="cmd=formatBlock&amp;arg=h2">formatBlock:H2</button>
+      <button type="button" data-ed="cmd=formatBlock&amp;arg=h3">formatBlock:H3</button>
+      <button type="button" data-ed="cmd=formatBlock&amp;arg=blockquote">formatBlock:Blockquote</button>
     </fieldset>
     <fieldset>    
       <button type="button" data-ed="cmd=insertImage">insertImage</button>
@@ -120,7 +140,7 @@ hr {
           <dt>copy</dt> <dd><kbd><kbd>Ctrl</kbd>+<kbd>C</kbd></kbd> (Win) <br> <kbd><kbd>cmd</kbd>+<kbd>C</kbd></kbd> (Mac)</dd>
           <dt>paste</dt> <dd><kbd><kbd>Ctrl</kbd>+<kbd>V</kbd></kbd> (Win)  <br> <kbd><kbd>cmd</kbd>+<kbd>V</kbd></kbd> (Mac)</dd>
           <dt>cut</dt> <dd><kbd><kbd>Ctrl</kbd>+<kbd>X</kbd></kbd> (Win)  <br> <kbd><kbd>cmd</kbd>+<kbd>X</kbd></kbd> (Mac)</dd>
-          <dt>drag&drop</dt><dd>Select content anywhere with your mouse, and drag it into the editor panel.</dd>
+          <dt>drag&amp;drop</dt><dd>Select content anywhere with your mouse, and drag it into the editor panel.</dd>
         </dl>
     </fieldset>
     <fieldset>
@@ -143,7 +163,7 @@ hr {
   <code id="editor-markup" class="innercircle"></code>
   <button type="button" id="validate-html">validate html</button>
   <div id="validation-results" style="display: none">
-    <h4>Validation Results (Errors: <strong class="error-count"></strong>, Warnings <strong class="warning-count"></strong>)</h4>
+    <h3>Validation Results (Errors: <strong class="error-count"></strong>, Warnings <strong class="warning-count"></strong>)</h3>
     
     <ul class="error-list"></ul>
     <ul class="warning-list"></ul>
@@ -176,6 +196,7 @@ function() {
         if (sandbox.innerHTML != editor.innerHTML) {
           editorMarkup.innerHTML = editor.innerHTML.escapeHTML();
           sandbox.innerHTML = editor.innerHTML;
+          $("validation-results").hide();
         }
     },
     500);
@@ -408,19 +429,45 @@ function initEditor(form, styleWithCSS) {
           parameters: { fragment: fragment, output: "json" },
           onCreate:  Element.hide.curry("validation-results"),
           onSuccess: function(transport) {
+            /**
+             * Thx to the stupid xml2ary class we use in the backend
+             * we get deep-nested objects
+             */
             var response  = transport.responseJSON,
-                results   = response["env:Envelope"]["_c"]["env:Body"]["_c"]["m:markupvalidationresponse"]["_c"];
-            container.down(".error-count").update(results["m:errors"]["_c"]["m:errorcount"]["_v"]);
-            container.down(".warning-count").update(results["m:warnings"]["_c"]["m:warningcount"]["_v"]);
+                results   = response["env:Envelope"]["_c"]["env:Body"]["_c"]["m:markupvalidationresponse"]["_c"],
+                errors    = results["m:errors"]["_c"]["m:errorlist"]["_c"],
+                warnings  = results["m:warnings"]["_c"]["m:warninglist"]["_c"],
+                template  = '<li><h4>#{message}</h4>#{explanation}<p class="source"><b>Source:</b> #{source}</p></li>',
+                errorList = container.down(".error-list"),
+                warningList = container.down(".warning-list"),
+                unnest    = function(object) {
+                  var result = {}, i;
+                  for (i in object) {
+                    result[i.sub("m:", "")] = object[i]["_v"];
+                  }
+                  return result;
+                };
+            
+            // Convert the arrays into a readable format
+            errors = errors ? errors["m:error"] : [];
+            warnings = warnings ? warnings["m:warning"] : [];
+            errors = errors.map(function(error) { return unnest(error["_c"]); });
+            warnings = warnings.map(function(warning) { return unnest(warning["_c"]); });
+            
+            container.down(".error-count").update(errors.length);
+            container.down(".warning-count").update(warnings.length);
+            
+            errors.each(function(error) { errorList.insert(template.interpolate(error)); });
+            warnings.each(function(warning) { warningList.insert(template.interpolate(warning)); });
             
             container.show();
           },
-          onFailure: function() { alert("http error!"); },
-          onException: function() { alert("js error!"); }
+          onFailure: function() { alert("http error!");},
+          onException: function(xhr, e) { alert("js error, check console!"); console.log("js error", e); }
         });
-      }
+      };
     })());
-};
+}
   
 </script>
 
