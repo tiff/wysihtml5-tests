@@ -84,9 +84,13 @@ hr {
 #validation-results .source {
   margin-top: 10px;
 }
-#validation-results h4,
+#validation-results .error-list h4,
 #validation-results .source strong {
   color: red;
+}
+
+#validation-results .warning-list h4 {
+  color: blue;
 }
 </style>
 
@@ -437,7 +441,7 @@ function initEditor(form, styleWithCSS) {
                 results   = response["env:Envelope"]["_c"]["env:Body"]["_c"]["m:markupvalidationresponse"]["_c"],
                 errors    = results["m:errors"]["_c"]["m:errorlist"]["_c"],
                 warnings  = results["m:warnings"]["_c"]["m:warninglist"]["_c"],
-                template  = '<li><h4>#{message}</h4>#{explanation}<p class="source"><b>Source:</b> #{source}</p></li>',
+                template  = '<li><h4>#{message}</h4>#{explanation}<p class="source"><b>Source:</b> #{source}</p><p><b>Line:</b> #{line}, <b>Column</b> #{col}</p></li>',
                 errorList = container.down(".error-list"),
                 warningList = container.down(".warning-list"),
                 unnest    = function(object) {
@@ -462,7 +466,7 @@ function initEditor(form, styleWithCSS) {
             
             container.show();
           },
-          onFailure: function() { alert("http error!");},
+          onFailure: function() { alert("http error!"); },
           onException: function(xhr, e) { alert("js error, check console!"); console.log("js error", e); }
         });
       };
