@@ -112,6 +112,8 @@ hr {
 
 
   <code id="editor-markup" class="innercircle"></code>
+  <button type="button" id="validate-html">validate html</button>
+  <div id="validation-results"></div>
   <hr>
 </div>
 
@@ -359,7 +361,27 @@ function initEditor(form, styleWithCSS) {
             //querycommand... function not supported
         }
     }
-
+    
+    var VALIDATOR_HTML_TEMPLATE = '<!DOCTYPE html><html><head><title></title></head><body><div>#{html}</div></body></html>';
+    function validate(html) {
+      var fragment = VALIDATOR_HTML_TEMPLATE.interpolate({ html: html });
+      new Ajax.Request('validator/proxy.php', {
+        parameters: { fragment: fragment, output: "json" },
+        onSuccess: function(transport) {
+          var response = transport.responseJSON,
+              results  = response["env:Envelope"]["_c"]["env:Body"]["_c"]["m:markupvalidationresponse"]["_c"];
+          alert(
+            "VALIDATION RESULTS\n" + 
+            "error: "     + results["m:errors"]["_c"]["m:errorcount"]["_v"] + "\n" +
+            "warnings: "  + results["m:warnings"]["_c"]["m:warningcount"]["_v"]
+          );
+        }
+      });
+    }
+    
+    $("validate-html").observe("click", function(){
+      validate($("editor-markup").innerHTML);
+    });
 };
   
 </script>
