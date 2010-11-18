@@ -167,10 +167,9 @@ hr {
   <code id="editor-markup" class="innercircle"></code>
   <button type="button" id="validate-html">validate html</button>
   <div id="validation-results" style="display: none">
-    <h3>Validation Results (Errors: <strong class="error-count"></strong>, Warnings <strong class="warning-count"></strong>)</h3>
-    
-    <ul class="error-list"></ul>
-    <ul class="warning-list"></ul>
+    <h3>Validation Results (Errors: <strong class="error-count"></strong>, Warnings: <strong class="warning-count"></strong>)</h3>
+    <ol class="error-list"></ol>
+    <ol class="warning-list"></ol>
   </div>
   <hr>
 </div>
@@ -441,7 +440,7 @@ function initEditor(form, styleWithCSS) {
                 results   = response["env:Envelope"]["_c"]["env:Body"]["_c"]["m:markupvalidationresponse"]["_c"],
                 errors    = results["m:errors"]["_c"]["m:errorlist"]["_c"],
                 warnings  = results["m:warnings"]["_c"]["m:warninglist"]["_c"],
-                template  = '<li><h4>#{message}</h4>#{explanation}<p class="source"><b>Source:</b> #{source}</p><p><b>Line:</b> #{line}, <b>Column</b> #{col}</p></li>',
+                template  = '<li><h4>#{message}</h4><p class="source"><b>Source:</b> #{source}</p><p><b>Line:</b> #{line}, <b>Column</b> #{col}</p></li>',
                 errorList = container.down(".error-list"),
                 warningList = container.down(".warning-list"),
                 unnest    = function(object) {
