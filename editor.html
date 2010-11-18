@@ -453,8 +453,8 @@ function initEditor(form, styleWithCSS) {
                 };
             
             // Convert the arrays into a readable format
-            errors = errors ? errors["m:error"] : [];
-            warnings = warnings ? warnings["m:warning"] : [];
+            errors = errors ? [errors["m:error"]].flatten() : [];
+            warnings = warnings ? [warnings["m:warning"]].flatten() : [];
             errors = errors.map(function(error) { return unnest(error["_c"]); });
             warnings = warnings.map(function(warning) { return unnest(warning["_c"]); });
             
