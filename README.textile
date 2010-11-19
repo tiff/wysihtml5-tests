@@ -22,6 +22,14 @@ http://blog.whatwg.org/the-road-to-html-5-contenteditable
 demo on quirksmode:
 http://www.quirksmode.org/dom/execCommand/
 
+android bug tracker issue concerning support of contentEditable:
+http://code.google.com/p/android/issues/detail?id=8253
+http://code.google.com/p/android/issues/detail?id=9515
+
+resources on why contentEditable doesn't work on iOS:
+http://stackoverflow.com/questions/723592/why-doesnt-contenteditable-work-on-the-iphone
+http://www.symphonious.net/2010/09/13/contenteditable-in-mobile-webkit/
+
 h1. Contributors
 
 * Ingo Chao (ingochao)
