@@ -3,10 +3,11 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
-    <title>contentEditable</title>
+    <title>contentEditable - Compliance Test / Compatibility Table</title>
     <style>
       body {
         font-family: verdana, arial, sans-serif;
+        font-size: 12px;
       }
       h1 {
         font-size: 20px;
@@ -16,6 +17,10 @@
       }
       td, th {
         padding: 5px;
+        text-align: center;
+      }
+      td:first-child {
+        text-align: left;
       }
       td.yes {
         background-color: rgb(0, 255, 0);
@@ -45,10 +50,14 @@
       tr:hover {
         background-color: #ccc;
       }
+      small {
+        font-size: 10px;
+        display: block;
+      }
     </style>
   </head>
   <body>
-    <h1>Compliance Test for contenteditable elements and javascript api</h1>
+    <h1>Compliance Test for contentEditable elements and javascript api</h1>
     <p>Your browser: <span id="user-agent"></span></p>
     
     <table>
@@ -206,8 +215,8 @@
         <td class="yes">yes</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
       </tr>
@@ -220,8 +229,8 @@
         <td class="yes">yes</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
       </tr>
@@ -234,8 +243,8 @@
         <td class="yes">yes</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
       </tr>
@@ -248,8 +257,8 @@
         <td class="yes">yes</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
       </tr>
@@ -262,8 +271,8 @@
         <td>no!</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
       </tr>
@@ -276,8 +285,8 @@
         <td class="yes">yes</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
       </tr>
@@ -290,8 +299,8 @@
         <td>no!</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
       </tr>
@@ -304,8 +313,8 @@
         <td>no!</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
       </tr>
@@ -318,8 +327,8 @@
         <td class="yes">yes</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
       </tr>
@@ -332,8 +341,8 @@
         <td class="yes">yes</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
       </tr>
@@ -346,8 +355,8 @@
         <td class="yes">yes</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
       </tr>
@@ -360,8 +369,8 @@
         <td>no!</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
       </tr>
@@ -374,8 +383,8 @@
         <td class="yes">yes</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
       </tr>
@@ -388,8 +397,8 @@
         <td class="yes">yes</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
       </tr>
@@ -402,8 +411,8 @@
         <td class="yes">yes</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
       </tr>
@@ -416,8 +425,8 @@
         <td class="yes">yes</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
       </tr>
@@ -430,8 +439,8 @@
         <td class="yes">yes</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
       </tr>
@@ -444,8 +453,8 @@
         <td class="yes">yes</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
       </tr>
@@ -458,8 +467,8 @@
         <td class="yes">yes</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
       </tr>
@@ -472,8 +481,8 @@
         <td class="yes">yes</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
       </tr>
@@ -505,8 +514,8 @@
         <td class="yes">yes</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
       </tr>
@@ -519,8 +528,8 @@
         <td>no</td>
         <td>no</td>
         <td>no</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td>no</td>
         <td>no</td>
       </tr>
@@ -533,8 +542,8 @@
         <td class="yes">yes</td>
         <td>no</td>
         <td>no</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td>no</td>
         <td>no</td>
       </tr>
@@ -547,8 +556,8 @@
         <td class="yes">yes</td>
         <td>no</td>
         <td>no</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td>no</td>
         <td>no</td>
       </tr>
@@ -561,8 +570,8 @@
         <td>no</td>
         <td>no</td>
         <td>no</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td>no</td>
         <td>no</td>
       </tr>
@@ -575,8 +584,8 @@
         <td>no</td>
         <td>no</td>
         <td>no</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td>no</td>
         <td>no</td>
       </tr>
@@ -589,8 +598,8 @@
         <td>no</td>
         <td>no</td>
         <td>no</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td>no</td>
         <td>no</td>
       </tr>
@@ -603,8 +612,8 @@
         <td class="yes">yes</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
       </tr>
@@ -617,8 +626,8 @@
         <td class="yes">yes</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
       </tr>
@@ -631,8 +640,8 @@
         <td class="yes">yes</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
       </tr>
@@ -645,8 +654,8 @@
         <td>no</td>
         <td>no</td>
         <td>no</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td>no</td>
         <td>no</td>
       </tr>
@@ -659,8 +668,8 @@
         <td>no</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
       </tr>
@@ -673,8 +682,8 @@
         <td>no</td>
         <td>no</td>
         <td>no</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td>no</td>
         <td>no</td>
       </tr>
@@ -687,8 +696,8 @@
         <td class="yes">yes</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
       </tr>
@@ -701,8 +710,8 @@
         <td>no</td>
         <td>no</td>
         <td>no</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td>no</td>
         <td>no</td>
       </tr>
@@ -715,8 +724,8 @@
         <td class="yes">yes</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
       </tr>
@@ -729,8 +738,8 @@
         <td class="yes">yes</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
       </tr>
@@ -743,8 +752,8 @@
         <td class="yes">yes</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
       </tr>
@@ -757,8 +766,8 @@
         <td class="yes">yes</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
       </tr>
@@ -771,8 +780,8 @@
         <td class="yes">yes</td>
         <td>no</td>
         <td>no</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td>no</td>
         <td>no</td>
       </tr>
@@ -785,8 +794,8 @@
         <td class="yes">yes</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
       </tr>
@@ -799,8 +808,8 @@
         <td class="yes">yes</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
       </tr>
@@ -813,8 +822,8 @@
         <td class="yes">yes</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
       </tr>
@@ -827,8 +836,8 @@
         <td>no</td>
         <td>no</td>
         <td>no</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
       </tr>
@@ -841,13 +850,16 @@
         <td>no</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
-        <td>error</td>
-        <td>error</td>
+        <td>error *</td>
+        <td>error *</td>
         <td class="yes">yes</td>
         <td class="yes">yes</td>
       </tr>
     </table>
     
+    <p>
+      <small>* In order to check whether the browser supports a particular command the method <em>document.queryCommandSupport</em> is called. This method leads to a js error in Firefox 3.6+ even though the method itself exists.</small>
+    </p>
     
     <script src="https://ajax.googleapis.com/ajax/libs/prototype/1.6.1.0/prototype.js"></script>
     <script>

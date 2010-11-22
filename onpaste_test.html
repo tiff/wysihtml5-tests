@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <title>contentEditable - onpaste Test</title>
+    <style>
+      body {
+        font-family: verdana, arial, sans-serif;
+        font-size: 12px;
+      }
+      h1 {
+        font-size: 20px;
+      }
+      h3 {
+        font-size: 18px;
+        margin-top: 40px;
+      }
+      em {
+        display: block;
+        border: 1px solid #999;
+        padding: 4px;
+      }
+      .innercircle {
+        margin: 5px 0;
+        padding: 5px;
+        border: 1px solid #acacac;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        display: block;
+      }
+      #editor {
+        min-height: 100px;
+      }
+      td, th {
+        padding: 5px;
+        text-align: center;
+      }
+      td:first-child {
+        text-align: left;
+      }
+      td.yes {
+        background-color: rgb(0, 255, 0);
+        background-color: rgba(0, 255, 0, 0.5);
+      }
+      td.neutral {
+        background-color: rgb(255, 255, 255);
+        background-color: rgba(255, 255, 255, 0.5);
+      }
+      td {
+        background-color: rgb(255, 0, 0);
+        background-color: rgba(255, 0, 0, 0.5);
+      }
+      td:first-child {
+        background-color: transparent;
+      }
+      th {
+        background-color: #ccc;
+      }
+      tr:hover {
+        background-color: #ccc;
+      }
+      small {
+        font-size: 10px;
+        display: block;
+      }
+    </style>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/prototype/1.6.1.0/prototype.js"></script>
+  </head>
+  <body>
+    <h1>onpaste Test</h1>
+    <p>This test checks whether the browser copies javascript/css elements &amp; inline handlers into contentEditable areas</p>
+    <p>
+      Paste the <strong>entire</strong> following text into the contentEditable area below: <br>
+      <em>
+        Copy me!
+        <script>window._inlineScript = true;</script>
+        Copy me!
+        <img src="foo.gif" onerror="window._inlineHandler = true;" width="1" height="1">
+        Copy me!
+        <script src="external_script.js"></script>
+        Copy me!
+        <iframe src="javascript:void(parent.window._iframeSrc=true);" width="1" height="1" frameborder="0"></iframe>
+        Copy me!
+        <style>.inline-test { display: none; }</style>
+        Copy me!
+        <link rel="stylesheet" type="text/css" src="external_stylesheet.css">
+        Copy me!
+      </em>
+    </p>
+    
+    <h3>Editor</h3>
+    <div contenteditable="true" class="innercircle" id="editor">#</div>
+    
+    <h3>Generated markup</h3>
+    <code id="editor-markup" class="innercircle"></code>
+    
+    <h3>Compatibility Table (whether the browser adopts the javascript/css in the contentEditable area)</h3>
+    <table>
+      <tr>
+        <th>Type</th>
+        <th>Your Browser</th>
+        <th>IE 6</th>
+        <th>IE 7</th>
+        <th>IE 8</th>
+        <th>IE 9b</th>
+        <th>Chrome 7</th>
+        <th>Safari 5</th>
+        <th>Firefox 3.6</th>
+        <th>Firefox 4b</th>
+        <th>Opera 10.63</th>
+        <th>Android 2.2 (MobileSafari)</th>
+        <th>iPad iOS 3.2.2 (MobileSafari)</th>
+      </tr>
+      <tr>
+        <td>
+          inline script<br />
+          <code>&lt;script&gt;foo();&lt;/script&gt;</code>
+        </td>
+        <td id="_inlineScript" class="neutral"> </td>
+        <td class="yes">yes <small>(but not executed **)</small></td>
+        <td class="yes">yes <small>(but not executed **)</small></td>
+        <td class="yes">yes <small>(but not executed **)</small></td>
+        <td class="yes">yes <small>(but not executed **)</small></td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td class="neutral">untestable *</td>
+        <td class="neutral">untestable *</td>
+      </tr>
+      <tr>
+        <td>
+          external script<br />
+          <code>&lt;script src=&quot;foo.js&quot;&gt;&lt;/script&gt;</code>
+        </td>
+        <td id="_externalScript" class="neutral"> </td>
+        <td class="yes">yes <small>(but not executed **)</small></td>
+        <td class="yes">yes <small>(but not executed **)</small></td>
+        <td class="yes">yes <small>(but not executed **)</small></td>
+        <td class="yes">yes <small>(but not executed **)</small></td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td class="neutral">untestable *</td>
+        <td class="neutral">untestable *</td>
+      </tr>
+      <tr>
+        <td>
+          inline handler<br />
+          <code>&lt;img src=&quot;foo.gif&quot; onerror=&quot;foo();&quot;&gt;</code>
+        </td>
+        <td id="_inlineHandler" class="neutral"> </td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>no ***</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td class="neutral">untestable *</td>
+        <td class="neutral">untestable *</td>
+      </tr>
+      <tr>
+        <td>
+          iframe src<br />
+          <code>&lt;iframe src=&quot;javascript:foo();&quot;&gt;</code>
+        </td>
+        <td id="_iframeSrc" class="neutral"> </td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes <small>(but not executed **)</small></td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td class="neutral">untestable *</td>
+        <td class="neutral">untestable *</td>
+      </tr>
+      <tr>
+        <td>
+          inline style<br />
+          <code>&lt;style&gt;.foobar { foo:bar; }&lt;/style;&gt;</code>
+        </td>
+        <td id="_inlineStyle" class="neutral"> </td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>no</td>
+        <td>no</td>
+        <td class="yes">yes</td>
+        <td>no</td>
+        <td>no</td>
+        <td class="neutral">untestable *</td>
+        <td class="neutral">untestable *</td>
+      </tr>
+      <tr>
+        <td>
+          external style<br />
+          <code>&lt;link rel=&quot;stylesheet&quot; src=&quot;foobar.css&quot;&gt;</code>
+        </td>
+        <td id="_externalStyle" class="neutral"> </td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td class="yes">yes</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td>no</td>
+        <td class="neutral">untestable *</td>
+        <td class="neutral">untestable *</td>
+      </tr>
+    </table>
+    
+    <button id="check" disabled type="button">Check your browser</button>
+    
+    <p>
+      <small>
+        * Android 2.2 and iOS 4.2 don't correctly support contentEditable elements<br>
+        ** The browser adopts the javascript into the contentEditable area but doesn't excute it<br>
+        *** IE9 adopts the inline handler when it's been pasted from the same origin
+      </small>
+    </p>
+    
+    <script>
+      Event.observe(window, "load", function() {
+        var tests = {
+          "_inlineScript":    "script:not([src])",
+          "_externalScript":  "script[src]",
+          "_inlineHandler":   "img[onerror^='window.']",
+          "_iframeSrc":       "iframe[src^='javascript:']",
+          "_inlineStyle":     "style",
+          "_externalStyle":   "link"
+        };
+        
+        Object.keys(tests).each(function(test) { window[test] = false; });
+
+        var editor = $("editor"),
+            editorMarkup = $("editor-markup"),
+            button = $("check");
+
+        editor.focus();
+
+        button.observe("click", function() {
+          // Check whether js/css is adopted
+          $H(tests).each(function(pair) {
+            var isStyle = pair.key.endsWith("Style");
+            if (window[pair.key] && !isStyle) {
+              // yes, executed
+              $(pair.key).removeClassName("neutral").addClassName("yes").update("yes");
+            } else {
+              if (editor.down(pair.value)) {
+                // yes, but not executed, only adopted
+                $(pair.key).removeClassName("neutral").addClassName("yes").update("yes" + (isStyle ? "" : " <small>but not executed **</small>"));
+              } else {
+                // nope
+                $(pair.key).removeClassName("neutral").update("no");
+              }
+            }
+          });
+        });
+
+        setInterval(function() {
+          var escapedHtml = editor.innerHTML.escapeHTML();
+          if (escapedHtml != editorMarkup.innerHTML) {
+            editorMarkup.innerHTML = escapedHtml;
+          }
+          if (escapedHtml.length > 20) {
+            button.removeAttribute("disabled");
+          } else {
+            button.writeAttribute("disabled", "disabled");
+          }
+        }, 500);
+      });
+    </script>
+  </body>
+</html>
