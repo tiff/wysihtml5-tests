@@ -97,6 +97,12 @@ hr {
 #validation-results .warning-list h4 {
   color: blue;
 }
+
+#html-input {
+  width: 100%;
+  min-height: 5em;
+}
+
 </style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/prototype/1.6.1.0/prototype.js"></script>
@@ -139,7 +145,7 @@ hr {
       <button type="button" data-ed="cmd=createLink">createLink</button>
       <button type="button" data-ed="cmd=unlink">unlink</button>
     </fieldset>
-      <div id="editor" class="innercircle" contenteditable="true" >#</div><!--not empty for Fx's cursor-->
+<div id="editor" class="innercircle" contenteditable="true" >#</div><!--not empty for Fx's cursor-->
     <fieldset>
       <button type="button" data-ed="cmd=selectAll">selectAll</button>
       <button type="button" data-ed="cmd=unselect">unselect</button>
@@ -157,6 +163,7 @@ hr {
     <fieldset>
       <button type="button" data-ed="cmd=undo">undo</button>
       <button type="button" data-ed="cmd=redo">redo</button>
+      <button type="button" onclick="$('editor').focus();">focus</button>
     </fieldset>
     
     <!--<fieldset>
@@ -166,7 +173,14 @@ hr {
   </form>
 
 </div>
-
+<div class="section">
+  <h2>Direct HTML input</h2>
+  <form>
+    <textarea id="html-input"></textarea>
+    <button type="button" id="html-input-submit">submit</button>
+  <hr>
+  </form>
+</div>
 <div class="section">
   <h2>Generated Markup (<code>styleWithCSS == false</code>)</h2>
 
@@ -197,6 +211,7 @@ function() {
     var editor = $("editor"),
       editorMarkup = $("editor-markup"),
       sandbox = $("sandbox");
+      
     
     editor.focus();
     
@@ -210,6 +225,11 @@ function() {
         }
     },
     500);
+    
+
+    
+
+    
 });
 
 function initEditor(form, styleWithCSS) {
@@ -220,6 +240,8 @@ function initEditor(form, styleWithCSS) {
     if (isSupported('styleWithCSS')) {
         document.execCommand('styleWithCSS', styleWithCSS, false);
     }
+    
+  
     
     buttons.each(function(button) {
 
@@ -477,6 +499,16 @@ function initEditor(form, styleWithCSS) {
         });
       };
     })());
+
+
+    $("html-input-submit").observe("click", function() {
+      $("editor").innerHTML = $("html-input").value;
+    });
+
+
+
+
+
 }
   
 </script>
