@@ -5,30 +5,30 @@ This repo contains tests and demos for the contentEditable attribute introduced 
 h1. Links
 
 contentEditable attribute spec:
-http://www.whatwg.org/specs/web-apps/current-work/multipage/editing.html#contenteditable
+"http://www.whatwg.org/specs/web-apps/current-work/multipage/editing.html#contenteditable":http://www.whatwg.org/specs/web-apps/current-work/multipage/editing.html#contenteditable
 
 javascript api:
-http://www.whatwg.org/specs/web-apps/current-work/multipage/dnd.html#editing-apis
+"http://www.whatwg.org/specs/web-apps/current-work/multipage/dnd.html#editing-apis":http://www.whatwg.org/specs/web-apps/current-work/multipage/dnd.html#editing-apis
 
 mozilla documentation:
-https://developer.mozilla.org/en/rich-text_editing_in_mozilla
+"https://developer.mozilla.org/en/rich-text_editing_in_mozilla":https://developer.mozilla.org/en/rich-text_editing_in_mozilla
 
 strange behavior of contentEditable in ie:
-http://annevankesteren.nl/2005/07/more-contenteditable
+"http://annevankesteren.nl/2005/07/more-contenteditable":http://annevankesteren.nl/2005/07/more-contenteditable
 
 the road to html5 contentEditable:
-http://blog.whatwg.org/the-road-to-html-5-contenteditable
+"http://blog.whatwg.org/the-road-to-html-5-contenteditable":http://blog.whatwg.org/the-road-to-html-5-contenteditable
 
 demo on quirksmode:
-http://www.quirksmode.org/dom/execCommand/
+"http://www.quirksmode.org/dom/execCommand/":http://www.quirksmode.org/dom/execCommand/
 
 android bug tracker issue concerning support of contentEditable:
-http://code.google.com/p/android/issues/detail?id=8253
-http://code.google.com/p/android/issues/detail?id=9515
+"http://code.google.com/p/android/issues/detail?id=8253":http://code.google.com/p/android/issues/detail?id=8253
+"http://code.google.com/p/android/issues/detail?id=9515":http://code.google.com/p/android/issues/detail?id=9515
 
 resources on why contentEditable doesn't work on iOS:
-http://stackoverflow.com/questions/723592/why-doesnt-contenteditable-work-on-the-iphone
-http://www.symphonious.net/2010/09/13/contenteditable-in-mobile-webkit/
+"http://stackoverflow.com/questions/723592/why-doesnt-contenteditable-work-on-the-iphone":http://stackoverflow.com/questions/723592/why-doesnt-contenteditable-work-on-the-iphone
+"http://www.symphonious.net/2010/09/13/contenteditable-in-mobile-webkit/":http://www.symphonious.net/2010/09/13/contenteditable-in-mobile-webkit/
 
 h1. Contributors
 
