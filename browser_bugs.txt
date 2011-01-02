@@ -1,8 +1,11 @@
-* Opera (tested v10.63 & v11b) needs a contenteditable=true element in the page in order to let document.queryCommandSupported report correct results
-* Opera (tested v10.63 & v11b) doesn't keep formatting when pasting content into contenteditable elements
-* Firefox (tested v3.6 & v4b) needs at least one character in a contenteditable=true element in order to make sure that focussing works properly
+* Opera (tested v10.63 & v11b) needs a contentEditable=true element in the page in order to let document.queryCommandSupported report correct results
+* Opera (tested v10.63 & v11b) converts copied HTML into plain text when pasting into contentEditable elements
+* Firefox (tested v3.6 & v4b) needs at least one character or a lin break "<br>" in a contentEditable=true element in order to make sure that focussing works properly
 * In Firefox (tested v3.6 & v4b) calling "document.queryCommandSupported" with any parameter causes a JS error
+* In Firefox (tested v3.6 & v4b) calling "document.queryCommandEnabled('styleWithCSS', false, anyValue)" while a contentEditable element has focus causes a JS error
 * contenteditable=true and it's js api technically seems to be supported on iOS (tested v3.2.2 and v4.2) and Android (tested v2.2). Unfortunately it's not able to focus such fields. Also the onscreen keyboard refuses to open.
-* IE9 seems to be the only browser who treats content pasted into contenteditable elements different, depending on whether the content is copied from a same origin or non-same origin host.
+* IE9 seems to be the only browser who treats content pasted into contentEditable elements different, depending on whether the content is copied from a same origin or non-same origin host.
 * IE6 sometimes randomly crashes while working with document.execCommand
-* 
+* IE (tested v6-9) and Opera (tested v10-11) insert a new <p> elements when pressing return in contentEditable elements
+* Chrome and Safari insert a new <div> element when pressing return in contentEditable elements
+* Firefox is the only browser who inserts a <br> element on return

@@ -30,6 +30,17 @@ resources on why contentEditable doesn't work on iOS:
 "http://stackoverflow.com/questions/723592/why-doesnt-contenteditable-work-on-the-iphone":http://stackoverflow.com/questions/723592/why-doesnt-contenteditable-work-on-the-iphone
 "http://www.symphonious.net/2010/09/13/contenteditable-in-mobile-webkit/":http://www.symphonious.net/2010/09/13/contenteditable-in-mobile-webkit/
 
+tutorials on how to create a rich text editor cross browser
+"http://dev.opera.com/articles/view/rich-html-editing-in-the-browser-part-1/":http://dev.opera.com/articles/view/rich-html-editing-in-the-browser-part-1/
+"http://dev.opera.com/articles/view/rich-html-editing-in-the-browser-part-2/":http://dev.opera.com/articles/view/rich-html-editing-in-the-browser-part-2/
+
+list of contentEditable misbehaviors in firefox 3.5 and how to workaround them
+"http://accessgarage.wordpress.com/2009/05/08/how-to-hack-your-app-to-make-contenteditable-work/":http://accessgarage.wordpress.com/2009/05/08/how-to-hack-your-app-to-make-contenteditable-work/
+
+getting cursor position in contentEditable elements
+"http://niichavo.wordpress.com/2009/01/06/contentEditable-div-cursor-position/":http://niichavo.wordpress.com/2009/01/06/contentEditable-div-cursor-position/
+
+
 h1. Contributors
 
 * Ingo Chao (ingochao)
