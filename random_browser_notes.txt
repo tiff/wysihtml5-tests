@@ -1,0 +1,2 @@
+* WebKit: Editable elements can also be achieved by setting "-webkit-user-modify: read-write;" via CSS
+* IE: The paste event (which is neat for parsing/sanitizing HTML before being inserted into editable elements) requires the user to opt-in in order to allow the javascript to access the clipboardData
