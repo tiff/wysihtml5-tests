@@ -80,6 +80,8 @@
         Copy me!
         <img src="foo.gif" onerror="window._inlineHandler = true;" width="1" height="1">
         Copy me!
+        <input onfocus="window._inlineAutoFocusHandler = true;" autofocus style="width:1px"> 
+        Copy me!
         <script src="external_script.js"></script>
         Copy me!
         <iframe src="javascript:void(parent.window._iframeSrc=true);" width="1" height="1" frameborder="0"></iframe>
@@ -88,6 +90,9 @@
         Copy me!
         <link rel="stylesheet" type="text/css" src="external_stylesheet.css">
         Copy me!
+
+
+
       </em>
     </p>
     
@@ -134,6 +139,7 @@
         <td class="neutral">untestable *</td>
         <td class="neutral">untestable *</td>
       </tr>
+
       <tr>
         <td>
           external script<br />
@@ -169,6 +175,25 @@
         <td>no</td>
         <td>no</td>
         <td>no</td>
+        <td class="neutral">untestable *</td>
+        <td class="neutral">untestable *</td>
+      </tr>
+      <tr>
+        <td>
+          inline autofocus handler<br />
+          <code>&lt;input onfocus=&quot;foo();&quot; autofocus&gt;</code>
+        </td>
+        <td id="_inlineAutoFocusHandler" class="neutral"> </td>
+        <td>?</td>
+        <td>?</td>
+        <td>?</td>
+        <td>?</td>
+        <td>?</td>
+        <td>?</td>
+        <td>?</td>
+        <td>?</td>
+        <td>?</td>
+        <td>?</td>
         <td class="neutral">untestable *</td>
         <td class="neutral">untestable *</td>
       </tr>
@@ -247,6 +272,7 @@
           "_inlineScript":    "script:not([src])",
           "_externalScript":  "script[src]",
           "_inlineHandler":   "img[onerror^='window.']",
+          "_inlineAutoFocusHandler":  "input[onfocus^='window.']",
           "_iframeSrc":       "iframe[src^='javascript:']",
           "_inlineStyle":     "style",
           "_externalStyle":   "link"
