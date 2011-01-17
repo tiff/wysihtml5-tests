@@ -2,6 +2,15 @@ h1. About
 
 This repo contains tests and demos for the contentEditable attribute introduced in the HTML5 spec.
 
+Find the queryCommand browser compatibility table here:
+"http://tifftiff.de/contenteditable/compliance_test.html":http://tifftiff.de/contenteditable/compliance_test.html
+
+Test editor:
+"http://tifftiff.de/contenteditable/editor.html":http://tifftiff.de/contenteditable/editor.html
+
+Test drag&drop or copy&paste of external stuff here:
+"http://tifftiff.de/contenteditable/onpaste_test.html":http://tifftiff.de/contenteditable/onpaste_test.html
+
 h1. Links
 
 contentEditable attribute spec:
