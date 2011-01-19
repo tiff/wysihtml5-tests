@@ -9,4 +9,5 @@
 * IE (tested v6-9) and Opera (tested v10-11) insert a new <p> elements when pressing return in contentEditable elements
 * Chrome and Safari insert a new <div> element when pressing return in contentEditable elements
 * Firefox is the only browser who inserts a <br> element on return
-* Firefox: Setting "position: absolute;" on a contentEditable element makes the element resizable to the user (resize-handles are shown after focus) - (issue: https://bugzilla.mozilla.org/show_bug.cgi?id=462758)
+* Firefox (tested 3.6 and 4b): Setting "position: absolute;" on a contentEditable element makes the element resizable to the user (resize-handles are shown after focus) - (issue: https://bugzilla.mozilla.org/show_bug.cgi?id=462758)
+* IE 6-9 are the only browsers who don't convert relative urls (in "src" or "href" attributes) to absolute urls when they are inserted into a contentEditable element from another page
