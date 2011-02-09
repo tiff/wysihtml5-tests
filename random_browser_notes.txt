@@ -6,3 +6,6 @@
 * Firefox: Resizing of objects can be disabled by invoking the enableObjectResizing command with value 'false'
 * IE & Firefox: When the user resizes objects (img, table, ...) in contentEditable both browsers will change/set the width/height inline style properties instead of the width/height attributes. Firefox can be forced to update the attributes by invoking the 'styleWithCSS' command with value 'false' prior to the resize action. In IE you manually need to do this by observing the proprietary 'onresizeend' event and moving the width/height values from the style object to the elements attributes.
 * IE: When the editor is running under https:// inserting <img>'s that are not https:// will cause a security warning including a confirmation whether the user wants to display these images. If the user denies, a default image is rendered but the src-attribute still points to the original path.
+* IE: Some query commands can be invoked via keyboard shortcuts (ctrl+b => bold, ctrl+i => italic, ctrl+u => underline)
+* Firefox, Opera & Safari: These browsers don't seem to support keyboard shortcuts for query commands
+* Chrome: Same commands are supported as in IE, except ctrl+b
