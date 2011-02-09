@@ -16,6 +16,9 @@ h1. Links
 contentEditable attribute spec:
 "http://www.whatwg.org/specs/web-apps/current-work/multipage/editing.html#contenteditable":http://www.whatwg.org/specs/web-apps/current-work/multipage/editing.html#contenteditable
 
+contentEdtable user interaction spec:
+"http://www.w3.org/TR/html5/editing.html#contenteditable":http://www.w3.org/TR/html5/editing.html#contenteditable
+
 javascript api:
 "http://www.whatwg.org/specs/web-apps/current-work/multipage/dnd.html#editing-apis":http://www.whatwg.org/specs/web-apps/current-work/multipage/dnd.html#editing-apis
 
