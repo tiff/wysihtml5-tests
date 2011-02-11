@@ -1,6 +1,6 @@
-* Opera (tested v10.63 & v11b) needs a contentEditable=true element in the page in order to let document.queryCommandSupported report correct results
-* Opera (tested v10.63 & v11b) converts copied HTML into plain text when pasting into contentEditable elements
-* Firefox (tested v3.6 & v4b) needs at least one character or a lin break "<br>" in a contentEditable=true element in order to make sure that focussing works properly
+* Opera (tested v10.63 & v11) needs a contentEditable=true element in the page in order to let document.queryCommandSupported report correct results
+* Opera (tested v10.63 & v11) converts copied HTML into plain text when pasting into contentEditable elements
+* Firefox (tested v3.6 & v4b) needs at least one character or a line break "<br>" in a contentEditable=true element in order to make sure that focussing works properly
 * In Firefox (tested v3.6 & v4b) calling "document.queryCommandSupported" with any parameter causes a JS error (issue: https://bugzilla.mozilla.org/show_bug.cgi?id=456798)
 * In Firefox (tested v3.6 & v4b) calling "document.queryCommandEnabled('styleWithCSS', false, anyValue)" while a contentEditable element has focus causes a JS error
 * contenteditable=true and it's js api technically seems to be supported on iOS (tested v3.2.2 and v4.2) and Android (tested v2.2). Unfortunately it's not able to focus such fields. Also the onscreen keyboard refuses to open.
@@ -11,5 +11,6 @@
 * Firefox is the only browser who inserts a <br> element on return
 * Firefox (tested 3.6 and 4b): Setting "position: absolute;" on a contentEditable element makes the element resizable to the user (resize-handles are shown after focus) - (issue: https://bugzilla.mozilla.org/show_bug.cgi?id=462758)
 * IE 6-9 are the only browsers who don't convert relative urls (in "src" or "href" attributes) to absolute urls when they are inserted into a contentEditable element from another page
-* Opera (tested v 11): When the caret is in the first and only item of a list (<ul><li>|</li></ul>) and the list is the first child of the contentEditable element, it's impossible to delete the list by hitting backspace. This behavior can be fixed manually by observing the keydown event.
-* Opera (tested v 11) on Mac reports event.ctrlKey == true when the CMD key is pressed, but event.ctrlKey == false when the CTRL key is pressed. This has to be taken into account when creating shortcuts for wysiwyg commands.
+* Opera (tested v11): When the caret is in the first and only item of a list (<ul><li>|</li></ul>) and the list is the first child of the contentEditable element, it's impossible to delete the list by hitting backspace. This behavior can be fixed manually by observing the keydown event.
+* Opera (tested v11) on Mac reports event.ctrlKey == true when the CMD key is pressed, but event.ctrlKey == false when the CTRL key is pressed. This has to be taken into account when creating keyboard shortcuts for wysiwyg commands.
+* IE (tested v6-8): If your contentEditable element is in an iframe which has no focus, then execCommand("<command>") will execute on the document that has the focus even though the execCommand method is invoked on the correct iframe's document object. This seems to be in IE9 standards mode.
