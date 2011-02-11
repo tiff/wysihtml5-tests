@@ -11,3 +11,4 @@
 * Firefox is the only browser who inserts a <br> element on return
 * Firefox (tested 3.6 and 4b): Setting "position: absolute;" on a contentEditable element makes the element resizable to the user (resize-handles are shown after focus) - (issue: https://bugzilla.mozilla.org/show_bug.cgi?id=462758)
 * IE 6-9 are the only browsers who don't convert relative urls (in "src" or "href" attributes) to absolute urls when they are inserted into a contentEditable element from another page
+* Opera (tested v 11): When the caret is in the first and only item of a list (<ul><li>|</li></ul>) and the list is the first child of the contentEditable element, it's impossible to delete the list by hitting backspace. This behavior can be fixed manually by observing the keydown event.
