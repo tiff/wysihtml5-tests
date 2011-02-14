@@ -9,3 +9,4 @@
 * IE: Some query commands can be invoked via keyboard shortcuts (ctrl+b => bold, ctrl+i => italic, ctrl+u => underline)
 * Firefox, Opera & Safari: These browsers don't seem to support keyboard shortcuts for query commands
 * Chrome: Same commands are supported as in IE, except ctrl+b
+* IE: query command 'formatBlock' can only be executed with the following tags H1-H6, DIV, ADDRESS, PRE. Besides that, unless other browsers, IE requires the tag name to wrapped in tag delimiters (< >): document.execCommand("formatBlock", false, "<H1>");
