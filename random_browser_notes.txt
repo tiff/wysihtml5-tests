@@ -14,3 +14,4 @@
 * Firefox: The user agent stylesheet (contenteditable.css) sets a color (blue) and text-decoration (underline) on links (<a>) which can only be overruled with a "!important"
 * IE: Selected <img> cannot be deleted by pressing backspace (however delete works). This behavior can easily be manually added by observing the keydown event.
 * Chrome & Safari: Clicking on a <img> doesn't select it like in Firefox and IE. This behavior can easily be manually be added by observing the mousedown event and using the javascript selection/range api.
+* Firefox >= 4: When copying an image via context menu option "Copy image" and inserting it into a contentEditable area, it gets inserted with a data-uri instead of an image path.
