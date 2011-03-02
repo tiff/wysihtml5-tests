@@ -33,3 +33,4 @@
 * Chrome & Safari: Clicking on a <img> doesn't select it like in Firefox and IE. This behavior can easily be manually be added by observing the mousedown event and using the javascript selection/range api.
 * Firefox >= 4: When copying an image via context menu option "Copy image" and inserting it into a contentEditable area, it gets inserted with a data-uri instead of an image path.
 * Firefox 3.6: When removing or hiding (removeChild, display: none;, ...) a selected image within a contentEditable element, the image resize handles won't be removed until the user types in something. This misbehavior can be avoided by calling document.execCommand with a supported command identifier afterwards. (eg. document.execCommand("italic", false, null))
+* Chrome, Safari & IE: When the caret is in an element that is bold and which is not wrapped by a <strong> or <b> then document.queryCommandState("bold") will return true. Same behavior applies to "italic".
