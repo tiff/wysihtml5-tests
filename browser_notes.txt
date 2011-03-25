@@ -36,3 +36,4 @@
 * Chrome, Safari & IE: When the caret is in an element that is bold and which is not wrapped by a <strong> or <b> then document.queryCommandState("bold") will return true. Same behavior applies to "italic".
 * Firefox is the only browser who only returns true for document.queryCommandState("bold") when the caret is in a <b> (<strong> will return false)
 * Firefox and Opera are the only browsers who only return true for document.queryCommandState("italic") when the caret is in a <i> (<em> will return false)
+* IE: Execute "document.execCommand("MultipleSelection", null, true);" in order to enable multiple elements to be selected
